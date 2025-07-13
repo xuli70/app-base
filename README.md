@@ -1,27 +1,18 @@
-# ? App Base
+# App Base
 
 Aplicaci?n base ultra-minimalista para iniciar nuevos proyectos con Coolify.
 
 ## ? Caracter?sticas
 
-- ? **HTML m?nimo funcional** con dise?o moderno
-- ? **Dockerfile v1.0.3** probado y funcionando
-- ? **Configuraci?n ultra-simple** de Caddy
-- ? **Health check** incluido
-- ? **Puerto 8080** configurado
-- ? **UTF-8 COMPLETO** para caracteres espa?oles
-- ? **Soporte garantizado** para: ?, tildes (?????), di?resis (??), s?mbolos (????)
+- ? HTML m?nimo funcional
+- ? Dockerfile v1.0.3 con soporte UTF-8 completo
+- ? Configuraci?n ultra-simple de Caddy
+- ? Health check incluido
+- ? Puerto 8080 configurado
+- ? UTF-8 para caracteres espa?oles con entidades HTML
+- ? Errores cr?ticos resueltos y documentados
 
-## ?? Soporte para Espa?ol
-
-Esta aplicaci?n base est? **especialmente configurada** para el desarrollo en espa?ol:
-
-- **Variables de entorno**: `LANG=C.UTF-8`, `LC_ALL=C.UTF-8`
-- **Headers HTTP**: `Content-Type: text/html; charset=utf-8`
-- **Configuraci?n Caddy**: UTF-8 para HTML, CSS, JS
-- **Prueba incluida**: Ma?ana ser? un d?a estupendo para programar en espa?ol ??
-
-## ? Uso
+## ? Uso R?pido
 
 1. **Fork o copia este repositorio**
 2. **Modifica `index.html`** con tu contenido
@@ -32,58 +23,68 @@ Esta aplicaci?n base est? **especialmente configurada** para el desarrollo en es
 
 ```
 app-base/
-??? index.html      # Tu aplicaci?n aqu? (con prueba de caracteres espa?oles)
-??? Dockerfile      # Configuraci?n para Coolify (v1.0.3 con UTF-8)
+??? index.html      # Tu aplicaci?n aqu?
+??? Dockerfile      # Configuraci?n para Coolify
 ??? README.md       # Este archivo
-??? .gitignore      # Archivos a ignorar
+??? test-spanish.html # Test de caracteres espa?oles
+??? TROUBLESHOOTING.md # Errores cr?ticos y soluciones
 ```
 
-## ? Configuraci?n para Coolify
+## ?? ERRORES CR?TICOS RESUELTOS (Julio 2025)
 
-- **Puerto**: 8080 (obligatorio para Coolify)
-- **Server**: Caddy
-- **Build Pack**: Dockerfile
-- **Charset**: UTF-8 autom?tico
-- **Headers de seguridad**: Coolify los maneja autom?ticamente
+### ? ERROR 1: Headers duplicados en Caddyfile
+**S?ntomas:** `Error: cannot specify headers in both arguments and block, at /app/Caddyfile`
 
-## ?? Para comenzar
+**? NO HACER:**
+```dockerfile
+# INCORRECTO - Causa error
+header / {
+    Content-Type "text/html; charset=utf-8"
+}
+```
 
-Simplemente edita `index.html` y comienza a desarrollar tu aplicaci?n. 
+**? SOLUCI?N:**
+```dockerfile
+# CORRECTO - Header directo sin bloques
+header Content-Type text/html; charset=utf-8
+```
 
-**Ejemplo de uso con caracteres espa?oles:**
+### ? ERROR 2: Caracteres espa?oles corruptos (?, tildes)
+**S?ntomas:** Caracteres como `?` en lugar de ?, ?, ?, ?, ?, ?
+
+**? NO FUNCIONA:**
+- Confiar solo en meta charset="UTF-8"
+- Variables de entorno LANG ?nicamente
+- Headers Content-Type en Caddyfile
+
+**? SOLUCI?N DEFINITIVA:**
 ```html
-<h1>?Hola! Bienvenido a mi aplicaci?n</h1>
-<p>Esta aplicaci?n funciona perfectamente con ?, tildes y s?mbolos especiales.</p>
-<p>Ma?ana ser? un d?a estupendo para programar en espa?ol ??</p>
+<!-- Usar entidades HTML para caracteres espa?oles -->
+&ntilde; &aacute; &eacute; &iacute; &oacute; &uacute;
+&iquest; &iexcl; &Ntilde; &Aacute; &Eacute; etc.
 ```
 
-## ? Deploy en Coolify
+## ? Notas Importantes
 
-1. **Crea nueva aplicaci?n** en Coolify
-2. **Conecta este repositorio**: `https://github.com/tu-usuario/app-base`
-3. **Selecciona Build Pack**: Dockerfile
-4. **Deploy autom?tico** - ?Ya est?!
+- **Puerto:** 8080 (obligatorio para Coolify)
+- **Server:** Caddy (mejor compatibilidad que nginx)
+- **Headers:** Coolify maneja autom?ticamente headers de seguridad
+- **UTF-8:** Usar entidades HTML para m?xima compatibilidad
 
-## ? Pruebas de caracteres
+## ?? Para Comenzar
 
-La aplicaci?n incluye una secci?n de pruebas para verificar que todos los caracteres espa?oles se muestran correctamente:
+Simplemente edita `index.html` y comienza a desarrollar tu aplicaci?n.
 
-- **Vocales con tilde**: ????? ?????
-- **?**: ??  
-- **S?mbolos**: ?? ?? ??
-- **Emojis**: ?? ? ?
+**Para caracteres espa?oles:** Usa entidades HTML o consulta `test-spanish.html` como referencia.
 
-## ? Tecnolog?as
+## ? Documentaci?n Adicional
 
-- **Base**: Node.js 18 Alpine
-- **Server**: Caddy 2.8+
-- **Encoding**: UTF-8
-- **Platform**: Coolify
-- **Health check**: Wget
+- `TROUBLESHOOTING.md` - Gu?a completa de errores y soluciones
+- `test-spanish.html` - Test completo de caracteres espa?oles
 
 ---
 
 **Creado por:** xuli70  
 **Versi?n:** 1.0.3  
 **Base probada:** Julio 2025  
-**Soporte UTF-8:** Completo para espa?ol
+**Estado:** ? Funcionando en producci?n con Coolify
