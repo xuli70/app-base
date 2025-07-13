@@ -23,12 +23,13 @@ RUN apk add --no-cache caddy
 # Copiar archivos
 COPY . .
 
-# Crear Caddyfile ULTRA-SIMPLE para Coolify (SIN HEADERS COMPLEJOS)
+# Crear Caddyfile ULTRA-SIMPLE para Coolify con UTF-8
 RUN echo -e ":${PORT:-8080} {\n\
     root * /app\n\
     file_server\n\
     try_files {path} /index.html\n\
     encode gzip\n\
+    header Content-Type text/html; charset=utf-8\n\
     log {\n\
         output stdout\n\
         format console\n\
