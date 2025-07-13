@@ -98,9 +98,9 @@ header Content-Type text/html; charset=utf-8
 ### ? SOLUCI?N DEFINITIVA: Entidades HTML
 ```html
 <!-- Caracteres seguros que SIEMPRE funcionan -->
-<title>App Base - &ntilde; Espa&ntilde;ol</title>
-<p>Aplicaci&oacute;n base lista para desarrollo</p>
-<p>&iquest;C&oacute;mo est&aacute; usted? &iexcl;Excelente!</p>
+<title>App Base - &ntilde; Espa?ol</title>
+<p>Aplicaci?n base lista para desarrollo</p>
+<p>&iquest;C?mo est? usted? &iexcl;Excelente!</p>
 ```
 
 ### Tabla de Entidades HTML Espa?olas
@@ -187,12 +187,12 @@ CMD ["caddy", "run", "--config", "/app/Caddyfile", "--adapter", "caddyfile"]
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>App Base - &ntilde; Espa&ntilde;ol</title>
+    <title>App Base - &ntilde; Espa?ol</title>
 </head>
 <body>
-    <h1>App Base - &ntilde; Espa&ntilde;ol</h1>
-    <p>Aplicaci&oacute;n base lista para desarrollo</p>
-    <p>&iquest;C&oacute;mo est&aacute; usted? &iexcl;Excelente!</p>
+    <h1>App Base - &ntilde; Espa?ol</h1>
+    <p>Aplicaci?n base lista para desarrollo</p>
+    <p>&iquest;C?mo est? usted? &iexcl;Excelente!</p>
 </body>
 </html>
 ```
